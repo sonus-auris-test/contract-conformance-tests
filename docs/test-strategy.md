@@ -13,6 +13,7 @@ Primary organization: `sonus-auris`
 - test data is synthetic and contains no production credentials or customer payloads;
 - the suite runs without network access by default;
 - a product adapter must preserve the reference model and publish the seed and minimized trace on failure;
+- account access fails closed: signed-out and AAL1 states always outrank recovery, onboarding, voice unlock, and application-shell state;
 - scheduled CI is defense in depth; pull-request and main-branch checks remain authoritative.
 
 ## Expansion path
