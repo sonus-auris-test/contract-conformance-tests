@@ -13,4 +13,9 @@ python scripts/verify_repository.py
 
 The initial model is executable rather than a placeholder. Product adapters should be added through focused pull requests while preserving the reference-model tests as an oracle.
 
+The auth oracle also models fresh-sign-in navigation and the account-deletion
+re-authentication boundary: Home is mandatory after a completed sign-in, and
+destructive deletion needs the exact account email plus a recent phone or TOTP
+proof.
+
 Tracking: https://github.com/ORESoftware/ai-agent-coordinator.rs/issues/139

@@ -7,8 +7,12 @@ from dataclasses import replace
 from deep_tests.auth_access_model import (
     AccessDestination,
     AccessState,
+    ApplicationTab,
     AssuranceLevel,
+    DeletionSecondFactor,
+    authorize_account_deletion,
     resolve_access,
+    resolve_post_auth_tab,
 )
 
 
@@ -115,6 +119,84 @@ class AuthenticationAccessContractTests(unittest.TestCase):
             ValueError, "unknown authentication assurance level"
         ):
             resolve_access(state)
+
+    def test_every_fresh_sign_in_enters_through_home(self) -> None:
+        for previous_tab in ApplicationTab:
+            with self.subTest(previous_tab=previous_tab):
+                self.assertIs(
+                    resolve_post_auth_tab(
+                        previous_tab, authentication_completed=True
+                    ),
+                    ApplicationTab.HOME,
+                )
+
+    def test_session_restore_may_preserve_the_previous_tab(self) -> None:
+        for previous_tab in ApplicationTab:
+            with self.subTest(previous_tab=previous_tab):
+                self.assertIs(
+                    resolve_post_auth_tab(
+                        previous_tab, authentication_completed=False
+                    ),
+                    previous_tab,
+                )
+
+    def test_deletion_accepts_exact_email_and_fresh_phone_or_authenticator(
+        self,
+    ) -> None:
+        now = 2_000_000_000
+        for factor in DeletionSecondFactor:
+            for verified_at in (now, now - 300, now + 60):
+                with self.subTest(factor=factor, verified_at=verified_at):
+                    self.assertTrue(
+                        authorize_account_deletion(
+                            signed_in_email="listener@example.test",
+                            confirmed_email=" LISTENER@EXAMPLE.TEST ",
+                            second_factor=factor,
+                            second_factor_verified_at=verified_at,
+                            now=now,
+                        )
+                    )
+
+    def test_deletion_fails_closed_for_email_factor_or_freshness_mismatch(
+        self,
+    ) -> None:
+        now = 2_000_000_000
+        rejected = (
+            {
+                "confirmed_email": "other@example.test",
+                "second_factor": DeletionSecondFactor.PHONE,
+                "second_factor_verified_at": now,
+            },
+            {
+                "confirmed_email": "listener@example.test",
+                "second_factor": None,
+                "second_factor_verified_at": now,
+            },
+            {
+                "confirmed_email": "listener@example.test",
+                "second_factor": DeletionSecondFactor.AUTHENTICATOR,
+                "second_factor_verified_at": None,
+            },
+            {
+                "confirmed_email": "listener@example.test",
+                "second_factor": DeletionSecondFactor.PHONE,
+                "second_factor_verified_at": now - 301,
+            },
+            {
+                "confirmed_email": "listener@example.test",
+                "second_factor": DeletionSecondFactor.AUTHENTICATOR,
+                "second_factor_verified_at": now + 61,
+            },
+        )
+        for case in rejected:
+            with self.subTest(case=case):
+                self.assertFalse(
+                    authorize_account_deletion(
+                        signed_in_email="listener@example.test",
+                        now=now,
+                        **case,
+                    )
+                )
 
 
 if __name__ == "__main__":
