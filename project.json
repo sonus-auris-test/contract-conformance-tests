@@ -10,8 +10,12 @@
     ".zpkg.toml",
     "AGENTS.md",
     "docs/test-strategy.md",
+    "fixtures/interface-contract-digest.json",
+    "scripts/build_interface_digest.py",
     "scripts/verify_repository.py",
+    "source-pins.json",
     "src/deep_tests/__init__.py",
+    "src/deep_tests/interface_contract.py",
     "tests"
   ],
   "schema_version": 1,

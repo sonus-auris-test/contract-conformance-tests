@@ -1,0 +1,15 @@
+{
+  "generatedBy": "sonus-auris-test/contract-conformance-tests",
+  "sources": {
+    "sonus-auris/sonus-auris-interfaces": {
+      "branch": "agent/branded-otp-templates-20260813",
+      "sha": "b2d3250a9d10512e640834359d57ed7c9bebe15a",
+      "exists": true,
+      "consumes": [
+        "generated/json-schema/index.json",
+        "generated/json-schema/devices.row.schema.json",
+        "generated/json-schema/devices.insert.schema.json"
+      ]
+    }
+  }
+}

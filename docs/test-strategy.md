@@ -25,3 +25,27 @@ Primary organization: `sonus-auris`
 3. Run the same trace against the reference model and implementation.
 4. Retain failing seeds as regression tests.
 5. Link behavior changes to the matching Linear issue and repository PR.
+
+## Product adapter — generated interfaces contract
+
+`src/deep_tests/interface_contract.py` reads the generated JSON Schemas from
+`sonus-auris/sonus-auris-interfaces` (pinned in `source-pins.json`). The
+reference model in `contract_model.py` is preserved unchanged as the oracle; the
+adapter binds its abstractions to real columns:
+
+| Oracle abstraction | Product artifact it is bound to |
+|---|---|
+| `Command.entity_id` | `devices.insert.required` — the per-install `device_id` a client must supply |
+| command payload domain | `devices.row.properties.platform.enum`, `role.enum` |
+| tombstone / soft delete | `devices.row.properties.revoked_at` (nullable) |
+| tenant boundary | `user_id` required on every row, forbidden on every insert |
+
+Always-on lane asserts the committed digest (real product data). Gated lane
+re-hashes the live tree and fails on drift. `SONUS_AURIS_SOURCE_ROOT` unset is a
+blocked dependency; set-but-wrong is a hard failure.
+
+Verified by mutating a scratch copy of the interfaces checkout: making
+`devices.insert` require `user_id`, renaming a schema title, and removing a
+schema file each produced failing tests, and a `SONUS_AURIS_SOURCE_ROOT`
+pointing outside the interfaces repository produced a hard error rather than a
+skip.

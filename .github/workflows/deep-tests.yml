@@ -36,3 +36,39 @@ jobs:
           PYTHONPATH: src
           DEEP_TEST_SEEDS: '0-49'
         run: python -m unittest discover -s tests -v
+
+  interfaces-contract-binding:
+    name: Interfaces contract binding (gated)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    if: >-
+      github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12'
+          cache: ''
+      - name: Materialize pinned sonus-auris-interfaces
+        env:
+          PRODUCT_APP_TOKEN: ${{ secrets.SONUS_AURIS_SOURCE_TOKEN }}
+        run: |
+          test -n "$PRODUCT_APP_TOKEN" || {
+            echo "blocked dependency: no approved short-lived installation token" >&2
+            exit 1
+          }
+          SHA=$(python -c "import json;print(json.load(open('source-pins.json'))['sources']['sonus-auris/sonus-auris-interfaces']['sha'])")
+          mkdir -p "${RUNNER_TEMP}/sonus-auris/sonus-auris-interfaces"
+          cd "${RUNNER_TEMP}/sonus-auris/sonus-auris-interfaces"
+          git init --quiet
+          git remote add origin "https://x-access-token:${PRODUCT_APP_TOKEN}@github.com/sonus-auris/sonus-auris-interfaces.git"
+          git fetch --quiet --depth 1 origin "$SHA"
+          git checkout --quiet FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "$SHA"
+      - name: Assert the contract digest still matches the product
+        env:
+          PYTHONPATH: src
+          SONUS_AURIS_SOURCE_ROOT: ${{ runner.temp }}/sonus-auris
+        run: python -m unittest discover -s tests -v

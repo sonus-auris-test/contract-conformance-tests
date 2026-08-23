@@ -17,6 +17,10 @@ required = {
     "scripts/verify_repository.py",
     ".github/workflows/deep-tests.yml",
     "src/deep_tests/__init__.py",
+    "src/deep_tests/interface_contract.py",
+    "scripts/build_interface_digest.py",
+    "source-pins.json",
+    "fixtures/interface-contract-digest.json",
 }
 missing = sorted(path for path in required if not (ROOT / path).exists())
 if missing:
@@ -56,3 +60,23 @@ if metadata.get("bootstrap_operation") != "deep-test-fleet-20260808":
 if not str(metadata.get("organization", "")).endswith("-test"):
     raise SystemExit("repository is not bound to a test organization")
 print(f"validated {metadata['organization']}/{metadata['repository']} suite={metadata['suite']}")
+
+pins = json.loads((ROOT / "source-pins.json").read_text(encoding="utf-8"))["sources"]
+if not pins:
+    raise SystemExit("source-pins.json declares no product sources")
+for name, entry in pins.items():
+    if not re.fullmatch(r"[0-9a-f]{40}", str(entry.get("sha", ""))):
+        raise SystemExit(f"{name}: source pin is not an immutable 40-character commit")
+
+digest = json.loads((ROOT / "fixtures/interface-contract-digest.json").read_text(encoding="utf-8"))
+if "_comment" not in digest or "generator" not in digest or not digest.get("schemas"):
+    raise SystemExit("interface contract digest is missing provenance or content")
+
+try:
+    import yaml  # optional; present on most runners
+except ImportError:
+    pass
+else:
+    parsed = yaml.safe_load(workflow)
+    if not isinstance(parsed.get("jobs"), dict) or not parsed["jobs"]:
+        raise SystemExit("workflow declares no jobs")
