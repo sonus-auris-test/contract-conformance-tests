@@ -1,0 +1,1504 @@
+{
+  "_comment": "Digest of the real generated contract in sonus-auris/sonus-auris-interfaces. Product data, not authored here: property names, required sets, enums and per-file SHA-256 are copied verbatim from the pinned checkout. Rebuild with scripts/build_interface_digest.py; never hand-edit to make a test pass.",
+  "fixture": "interface-contract-digest",
+  "generator": "scripts/build_interface_digest.py",
+  "schema_dir": "sonus-auris-interfaces/generated/json-schema",
+  "index": {
+    "entries": [
+      {
+        "table": "acoustic_events",
+        "kind": "insert",
+        "path": "generated/json-schema/acoustic_events.insert.schema.json"
+      },
+      {
+        "table": "acoustic_events",
+        "kind": "row",
+        "path": "generated/json-schema/acoustic_events.row.schema.json"
+      },
+      {
+        "table": "client_telemetry",
+        "kind": "insert",
+        "path": "generated/json-schema/client_telemetry.insert.schema.json"
+      },
+      {
+        "table": "client_telemetry",
+        "kind": "row",
+        "path": "generated/json-schema/client_telemetry.row.schema.json"
+      },
+      {
+        "table": "cloud_connections",
+        "kind": "insert",
+        "path": "generated/json-schema/cloud_connections.insert.schema.json"
+      },
+      {
+        "table": "cloud_connections",
+        "kind": "row",
+        "path": "generated/json-schema/cloud_connections.row.schema.json"
+      },
+      {
+        "table": "devices",
+        "kind": "insert",
+        "path": "generated/json-schema/devices.insert.schema.json"
+      },
+      {
+        "table": "devices",
+        "kind": "row",
+        "path": "generated/json-schema/devices.row.schema.json"
+      },
+      {
+        "table": "entitlements",
+        "kind": "insert",
+        "path": "generated/json-schema/entitlements.insert.schema.json"
+      },
+      {
+        "table": "entitlements",
+        "kind": "row",
+        "path": "generated/json-schema/entitlements.row.schema.json"
+      },
+      {
+        "table": "user_consents",
+        "kind": "insert",
+        "path": "generated/json-schema/user_consents.insert.schema.json"
+      },
+      {
+        "table": "user_consents",
+        "kind": "row",
+        "path": "generated/json-schema/user_consents.row.schema.json"
+      },
+      {
+        "table": "user_settings",
+        "kind": "insert",
+        "path": "generated/json-schema/user_settings.insert.schema.json"
+      },
+      {
+        "table": "user_settings",
+        "kind": "row",
+        "path": "generated/json-schema/user_settings.row.schema.json"
+      }
+    ]
+  },
+  "schemas": {
+    "acoustic_events.insert.schema.json": {
+      "table": "acoustic_events",
+      "kind": "insert",
+      "id": "https://sonus-auris.dev/schema/acoustic_events.insert.json",
+      "title": "AcousticEventInsert",
+      "type": "object",
+      "additionalProperties": false,
+      "sha256": "b4087c13c72262ff674ab92256a2f9e68ab1be7f9c914bf9584a61382e8804b5",
+      "required": [
+        "confidence",
+        "details",
+        "device_id",
+        "ended_at",
+        "kind",
+        "started_at"
+      ],
+      "properties": {
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "details": {
+          "type": "object"
+        },
+        "device_id": {
+          "type": "string"
+        },
+        "ended_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "snore",
+            "apneaPattern",
+            "music",
+            "speech",
+            "keyword",
+            "sleepCycle",
+            "sleepCycleAlarm",
+            "suddenLoudNoise",
+            "raisedVoice",
+            "possibleArgumentPattern"
+          ],
+          "type": "string"
+        },
+        "started_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "acoustic_events.row.schema.json": {
+      "table": "acoustic_events",
+      "kind": "row",
+      "id": "https://sonus-auris.dev/schema/acoustic_events.row.json",
+      "title": "AcousticEventRow",
+      "type": "object",
+      "additionalProperties": false,
+      "sha256": "c5040343e23b63c3cc188099295f97bc1aa6ef78aa49fc41400c60567f922e2f",
+      "required": [
+        "confidence",
+        "created_at",
+        "details",
+        "device_id",
+        "ended_at",
+        "id",
+        "kind",
+        "started_at",
+        "user_id"
+      ],
+      "properties": {
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "details": {
+          "type": "object"
+        },
+        "device_id": {
+          "type": "string"
+        },
+        "ended_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "snore",
+            "apneaPattern",
+            "music",
+            "speech",
+            "keyword",
+            "sleepCycle",
+            "sleepCycleAlarm",
+            "suddenLoudNoise",
+            "raisedVoice",
+            "possibleArgumentPattern"
+          ],
+          "type": "string"
+        },
+        "started_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "user_id": {
+          "format": "uuid",
+          "type": "string"
+        }
+      }
+    },
+    "client_telemetry.insert.schema.json": {
+      "table": "client_telemetry",
+      "kind": "insert",
+      "id": "https://sonus-auris.dev/schema/client_telemetry.insert.json",
+      "title": "ClientTelemetryInsert",
+      "type": "object",
+      "additionalProperties": false,
+      "sha256": "fa283fc3b57ebc6843a360150966ca431507a9ecba7bec07c48c5329efaf9839",
+      "required": [
+        "details",
+        "device_id",
+        "event",
+        "level",
+        "message",
+        "occurred_at"
+      ],
+      "properties": {
+        "app_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "client_event_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "details": {
+          "type": "object"
+        },
+        "device_id": {
+          "type": "string"
+        },
+        "event": {
+          "type": "string"
+        },
+        "level": {
+          "enum": [
+            "debug",
+            "info",
+            "warning",
+            "error",
+            "fatal"
+          ],
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "parent_span_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "platform": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "session_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "span_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "stack": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "trace_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "transport": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "client_telemetry.row.schema.json": {
+      "table": "client_telemetry",
+      "kind": "row",
+      "id": "https://sonus-auris.dev/schema/client_telemetry.row.json",
+      "title": "ClientTelemetryRow",
+      "type": "object",
+      "additionalProperties": false,
+      "sha256": "d2c74c67a6ebeb305e415e5dc8960b563c8b50eed5f5d758e239695a9baf85dd",
+      "required": [
+        "created_at",
+        "details",
+        "device_id",
+        "event",
+        "id",
+        "level",
+        "message",
+        "occurred_at",
+        "user_id"
+      ],
+      "properties": {
+        "app_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "client_event_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "details": {
+          "type": "object"
+        },
+        "device_id": {
+          "type": "string"
+        },
+        "event": {
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "level": {
+          "enum": [
+            "debug",
+            "info",
+            "warning",
+            "error",
+            "fatal"
+          ],
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "parent_span_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "platform": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "session_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "span_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "stack": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "trace_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "transport": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "user_id": {
+          "format": "uuid",
+          "type": "string"
+        }
+      }
+    },
+    "cloud_connections.insert.schema.json": {
+      "table": "cloud_connections",
+      "kind": "insert",
+      "id": "https://sonus-auris.dev/schema/cloud_connections.insert.json",
+      "title": "CloudConnectionProjectionInsert",
+      "type": "object",
+      "additionalProperties": false,
+      "sha256": "37a3af4f990cf4197b22916911fa04112630ed6a591d2c9aa5bf7a91f9f232d3",
+      "required": [
+        "created_at",
+        "id",
+        "link_mode",
+        "provider",
+        "status",
+        "updated_at"
+      ],
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "display_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "folder_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "last_sync_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "link_mode": {
+          "enum": [
+            "server_oauth",
+            "client_managed"
+          ],
+          "type": "string"
+        },
+        "provider": {
+          "enum": [
+            "google_drive",
+            "microsoft_onedrive",
+            "apple_icloud",
+            "dropbox",
+            "amazon_s3",
+            "cloudflare_r2"
+          ],
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "active",
+            "paused",
+            "revoked",
+            "failed"
+          ],
+          "type": "string"
+        },
+        "token_expires_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "cloud_connections.row.schema.json": {
+      "table": "cloud_connections",
+      "kind": "row",
+      "id": "https://sonus-auris.dev/schema/cloud_connections.row.json",
+      "title": "CloudConnectionProjectionRow",
+      "type": "object",
+      "additionalProperties": false,
+      "sha256": "7ae64f9c76c0d9b9407e9e3c3be7bb7a848aa48031d2fda95b1ded577500565e",
+      "required": [
+        "created_at",
+        "id",
+        "link_mode",
+        "provider",
+        "status",
+        "updated_at",
+        "user_id"
+      ],
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "display_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "folder_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "last_sync_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "link_mode": {
+          "enum": [
+            "server_oauth",
+            "client_managed"
+          ],
+          "type": "string"
+        },
+        "provider": {
+          "enum": [
+            "google_drive",
+            "microsoft_onedrive",
+            "apple_icloud",
+            "dropbox",
+            "amazon_s3",
+            "cloudflare_r2"
+          ],
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "active",
+            "paused",
+            "revoked",
+            "failed"
+          ],
+          "type": "string"
+        },
+        "token_expires_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "user_id": {
+          "format": "uuid",
+          "type": "string"
+        }
+      }
+    },
+    "devices.insert.schema.json": {
+      "table": "devices",
+      "kind": "insert",
+      "id": "https://sonus-auris.dev/schema/devices.insert.json",
+      "title": "DeviceRecordInsert",
+      "type": "object",
+      "additionalProperties": false,
+      "sha256": "16419ae612e0d77a8ce59c0b6b49cf10f5f6cdaf6903458f764f1c9bbe4462f1",
+      "required": [
+        "device_id",
+        "display_name",
+        "last_seen_at",
+        "platform",
+        "role"
+      ],
+      "properties": {
+        "app_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "device_id": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "last_seen_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "platform": {
+          "enum": [
+            "android",
+            "ios",
+            "macos",
+            "windows",
+            "linux",
+            "web"
+          ],
+          "type": "string"
+        },
+        "revoked_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "role": {
+          "enum": [
+            "recorder",
+            "viewer"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "devices.row.schema.json": {
+      "table": "devices",
+      "kind": "row",
+      "id": "https://sonus-auris.dev/schema/devices.row.json",
+      "title": "DeviceRecordRow",
+      "type": "object",
+      "additionalProperties": false,
+      "sha256": "2d9e5911ecbeb0a2a4cb06568e9cc0ac87d698ca9d324e504b61251bd2a673f2",
+      "required": [
+        "created_at",
+        "device_id",
+        "display_name",
+        "last_seen_at",
+        "platform",
+        "role",
+        "user_id"
+      ],
+      "properties": {
+        "app_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "device_id": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "last_seen_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "platform": {
+          "enum": [
+            "android",
+            "ios",
+            "macos",
+            "windows",
+            "linux",
+            "web"
+          ],
+          "type": "string"
+        },
+        "revoked_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "role": {
+          "enum": [
+            "recorder",
+            "viewer"
+          ],
+          "type": "string"
+        },
+        "user_id": {
+          "format": "uuid",
+          "type": "string"
+        }
+      }
+    },
+    "entitlements.insert.schema.json": {
+      "table": "entitlements",
+      "kind": "insert",
+      "id": "https://sonus-auris.dev/schema/entitlements.insert.json",
+      "title": "EntitlementInsert",
+      "type": "object",
+      "additionalProperties": false,
+      "sha256": "c631c9db592b931dc5080ddc72fc5094d909ef68308f429c06cf7b302ede3110",
+      "required": [
+        "device_limit",
+        "features",
+        "plan",
+        "source"
+      ],
+      "properties": {
+        "current_period_end": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "device_limit": {
+          "maximum": 1000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "external_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "features": {
+          "type": "object"
+        },
+        "plan": {
+          "enum": [
+            "free",
+            "plus",
+            "lifetime"
+          ],
+          "type": "string"
+        },
+        "source": {
+          "enum": [
+            "none",
+            "stripe",
+            "app_store",
+            "play_store"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "entitlements.row.schema.json": {
+      "table": "entitlements",
+      "kind": "row",
+      "id": "https://sonus-auris.dev/schema/entitlements.row.json",
+      "title": "EntitlementRow",
+      "type": "object",
+      "additionalProperties": false,
+      "sha256": "2ddd6c4e2f89059c29cbe70f556407441d0e0275f5547d552b3bbe771b117a82",
+      "required": [
+        "created_at",
+        "device_limit",
+        "features",
+        "plan",
+        "source",
+        "updated_at",
+        "user_id"
+      ],
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "current_period_end": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "device_limit": {
+          "maximum": 1000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "external_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "features": {
+          "type": "object"
+        },
+        "plan": {
+          "enum": [
+            "free",
+            "plus",
+            "lifetime"
+          ],
+          "type": "string"
+        },
+        "source": {
+          "enum": [
+            "none",
+            "stripe",
+            "app_store",
+            "play_store"
+          ],
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "user_id": {
+          "format": "uuid",
+          "type": "string"
+        }
+      }
+    },
+    "user_consents.insert.schema.json": {
+      "table": "user_consents",
+      "kind": "insert",
+      "id": "https://sonus-auris.dev/schema/user_consents.insert.json",
+      "title": "UserConsentInsert",
+      "type": "object",
+      "additionalProperties": false,
+      "sha256": "3a6125cda0346b6ff2baecacb9828d2723163f015be71e9162fdbf990ccb53e5",
+      "required": [
+        "accepted_at",
+        "consent_version",
+        "device_id",
+        "granted"
+      ],
+      "properties": {
+        "accepted_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "consent_version": {
+          "type": "string"
+        },
+        "device_id": {
+          "type": "string"
+        },
+        "granted": {
+          "type": "object"
+        },
+        "platform": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "user_consents.row.schema.json": {
+      "table": "user_consents",
+      "kind": "row",
+      "id": "https://sonus-auris.dev/schema/user_consents.row.json",
+      "title": "UserConsentRow",
+      "type": "object",
+      "additionalProperties": false,
+      "sha256": "b8aebab658a571295e031e69a80560b3084f70f7c093445b5a61d6e8b43f6a41",
+      "required": [
+        "accepted_at",
+        "consent_version",
+        "created_at",
+        "device_id",
+        "granted",
+        "id",
+        "user_id"
+      ],
+      "properties": {
+        "accepted_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "consent_version": {
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "device_id": {
+          "type": "string"
+        },
+        "granted": {
+          "type": "object"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "platform": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "user_id": {
+          "format": "uuid",
+          "type": "string"
+        }
+      }
+    },
+    "user_settings.insert.schema.json": {
+      "table": "user_settings",
+      "kind": "insert",
+      "id": "https://sonus-auris.dev/schema/user_settings.insert.json",
+      "title": "UserSettingsInsert",
+      "type": "object",
+      "additionalProperties": false,
+      "sha256": "c8a515460476ce94ad17fa8f24951a93fd76146ed4fe84c36a589576f17e5063",
+      "required": [
+        "acoustic_analysis_enabled",
+        "adaptive_loudness_db",
+        "adaptive_quality_enabled",
+        "analysis_activation_db",
+        "analysis_hold_seconds",
+        "analysis_sustain_seconds",
+        "auto_gain",
+        "bass_gain_db",
+        "bit_rate",
+        "capture_sample_rate",
+        "channels",
+        "cloud_provider",
+        "cloud_retention_hours",
+        "device_retention_hours",
+        "mic_sensitivity",
+        "mid_gain_db",
+        "music_detection_enabled",
+        "noise_suppress",
+        "noise_trigger_sensitivity",
+        "overlap_seconds",
+        "preferred_use_case",
+        "quiet_sample_rate",
+        "sample_rate",
+        "segment_minutes",
+        "sleep_analysis_enabled",
+        "snore_detection_enabled",
+        "speech_detection_enabled",
+        "treble_gain_db",
+        "updated_at",
+        "upload_enabled"
+      ],
+      "properties": {
+        "acoustic_analysis_enabled": {
+          "type": "boolean"
+        },
+        "adaptive_loudness_db": {
+          "maximum": 0,
+          "minimum": -90,
+          "type": "number"
+        },
+        "adaptive_quality_enabled": {
+          "type": "boolean"
+        },
+        "analysis_activation_db": {
+          "maximum": 0,
+          "minimum": -90,
+          "type": "number"
+        },
+        "analysis_hold_seconds": {
+          "maximum": 600,
+          "minimum": 0,
+          "type": "number"
+        },
+        "analysis_sustain_seconds": {
+          "maximum": 30,
+          "minimum": 0.5,
+          "type": "number"
+        },
+        "auto_gain": {
+          "type": "boolean"
+        },
+        "bass_gain_db": {
+          "maximum": 12,
+          "minimum": -12,
+          "type": "number"
+        },
+        "bit_rate": {
+          "maximum": 320000,
+          "minimum": 16000,
+          "type": "integer"
+        },
+        "capture_sample_rate": {
+          "enum": [
+            8000,
+            16000,
+            22050,
+            24000,
+            44100,
+            48000
+          ],
+          "type": "integer"
+        },
+        "channels": {
+          "maximum": 2,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "cloud_provider": {
+          "enum": [
+            "s3",
+            "googleDrive",
+            "oneDrive",
+            "iCloudDrive",
+            "dropbox"
+          ],
+          "type": "string"
+        },
+        "cloud_retention_hours": {
+          "maximum": 2000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "device_retention_hours": {
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "mic_sensitivity": {
+          "maximum": 4,
+          "minimum": 0.25,
+          "type": "number"
+        },
+        "mid_gain_db": {
+          "maximum": 12,
+          "minimum": -12,
+          "type": "number"
+        },
+        "music_detection_enabled": {
+          "type": "boolean"
+        },
+        "noise_suppress": {
+          "type": "boolean"
+        },
+        "noise_trigger_sensitivity": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "overlap_seconds": {
+          "maximum": 30,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "preferred_use_case": {
+          "enum": [
+            "security",
+            "music",
+            "meeting",
+            "voice_note",
+            "ambient"
+          ],
+          "type": "string"
+        },
+        "quiet_sample_rate": {
+          "enum": [
+            8000,
+            16000,
+            22050,
+            24000,
+            44100,
+            48000
+          ],
+          "type": "integer"
+        },
+        "sample_rate": {
+          "enum": [
+            8000,
+            16000,
+            22050,
+            24000,
+            44100,
+            48000
+          ],
+          "type": "integer"
+        },
+        "segment_minutes": {
+          "maximum": 60,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "sleep_analysis_enabled": {
+          "type": "boolean"
+        },
+        "snore_detection_enabled": {
+          "type": "boolean"
+        },
+        "speech_detection_enabled": {
+          "type": "boolean"
+        },
+        "treble_gain_db": {
+          "maximum": 12,
+          "minimum": -12,
+          "type": "number"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "upload_enabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "user_settings.row.schema.json": {
+      "table": "user_settings",
+      "kind": "row",
+      "id": "https://sonus-auris.dev/schema/user_settings.row.json",
+      "title": "UserSettingsRow",
+      "type": "object",
+      "additionalProperties": false,
+      "sha256": "f0e95aefe9528948c4e21e8228457a43616927b0dd1627e3866adcb5d0732f39",
+      "required": [
+        "acoustic_analysis_enabled",
+        "adaptive_loudness_db",
+        "adaptive_quality_enabled",
+        "analysis_activation_db",
+        "analysis_hold_seconds",
+        "analysis_sustain_seconds",
+        "auto_gain",
+        "bass_gain_db",
+        "bit_rate",
+        "capture_sample_rate",
+        "channels",
+        "cloud_provider",
+        "cloud_retention_hours",
+        "device_retention_hours",
+        "mic_sensitivity",
+        "mid_gain_db",
+        "music_detection_enabled",
+        "noise_suppress",
+        "noise_trigger_sensitivity",
+        "overlap_seconds",
+        "preferred_use_case",
+        "quiet_sample_rate",
+        "sample_rate",
+        "segment_minutes",
+        "sleep_analysis_enabled",
+        "snore_detection_enabled",
+        "speech_detection_enabled",
+        "treble_gain_db",
+        "updated_at",
+        "upload_enabled",
+        "user_id"
+      ],
+      "properties": {
+        "acoustic_analysis_enabled": {
+          "type": "boolean"
+        },
+        "adaptive_loudness_db": {
+          "maximum": 0,
+          "minimum": -90,
+          "type": "number"
+        },
+        "adaptive_quality_enabled": {
+          "type": "boolean"
+        },
+        "analysis_activation_db": {
+          "maximum": 0,
+          "minimum": -90,
+          "type": "number"
+        },
+        "analysis_hold_seconds": {
+          "maximum": 600,
+          "minimum": 0,
+          "type": "number"
+        },
+        "analysis_sustain_seconds": {
+          "maximum": 30,
+          "minimum": 0.5,
+          "type": "number"
+        },
+        "auto_gain": {
+          "type": "boolean"
+        },
+        "bass_gain_db": {
+          "maximum": 12,
+          "minimum": -12,
+          "type": "number"
+        },
+        "bit_rate": {
+          "maximum": 320000,
+          "minimum": 16000,
+          "type": "integer"
+        },
+        "capture_sample_rate": {
+          "enum": [
+            8000,
+            16000,
+            22050,
+            24000,
+            44100,
+            48000
+          ],
+          "type": "integer"
+        },
+        "channels": {
+          "maximum": 2,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "cloud_provider": {
+          "enum": [
+            "s3",
+            "googleDrive",
+            "oneDrive",
+            "iCloudDrive",
+            "dropbox"
+          ],
+          "type": "string"
+        },
+        "cloud_retention_hours": {
+          "maximum": 2000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "device_retention_hours": {
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "mic_sensitivity": {
+          "maximum": 4,
+          "minimum": 0.25,
+          "type": "number"
+        },
+        "mid_gain_db": {
+          "maximum": 12,
+          "minimum": -12,
+          "type": "number"
+        },
+        "music_detection_enabled": {
+          "type": "boolean"
+        },
+        "noise_suppress": {
+          "type": "boolean"
+        },
+        "noise_trigger_sensitivity": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "overlap_seconds": {
+          "maximum": 30,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "preferred_use_case": {
+          "enum": [
+            "security",
+            "music",
+            "meeting",
+            "voice_note",
+            "ambient"
+          ],
+          "type": "string"
+        },
+        "quiet_sample_rate": {
+          "enum": [
+            8000,
+            16000,
+            22050,
+            24000,
+            44100,
+            48000
+          ],
+          "type": "integer"
+        },
+        "sample_rate": {
+          "enum": [
+            8000,
+            16000,
+            22050,
+            24000,
+            44100,
+            48000
+          ],
+          "type": "integer"
+        },
+        "segment_minutes": {
+          "maximum": 60,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "sleep_analysis_enabled": {
+          "type": "boolean"
+        },
+        "snore_detection_enabled": {
+          "type": "boolean"
+        },
+        "speech_detection_enabled": {
+          "type": "boolean"
+        },
+        "treble_gain_db": {
+          "maximum": 12,
+          "minimum": -12,
+          "type": "number"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "upload_enabled": {
+          "type": "boolean"
+        },
+        "user_id": {
+          "format": "uuid",
+          "type": "string"
+        }
+      }
+    }
+  }
+}
