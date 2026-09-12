@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "sample_rate_hz": 1000,
+  "frame_count": 960,
+  "label": "invalid-window",
+  "speech_detected": false
+}

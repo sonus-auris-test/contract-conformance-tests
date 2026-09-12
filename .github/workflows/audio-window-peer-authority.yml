@@ -1,0 +1,25 @@
+name: Sonus audio-window peer-authority convergence
+
+on:
+  pull_request:
+    paths:
+      - "contracts/audio-window/**"
+      - ".github/workflows/audio-window-peer-authority.yml"
+  push:
+    branches: [main]
+    paths:
+      - "contracts/audio-window/**"
+      - ".github/workflows/audio-window-peer-authority.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  peer-authority:
+    uses: flags-2-env-test/contract-conformance-tests/.github/workflows/peer-authority-convergence.yml@ffaaa6bb025de65ea4440d78c61722adc94ac090
+    with:
+      typespec_path: contracts/audio-window/main.tsp
+      schema_path: contracts/audio-window/authored.schema.json
+      instances_path: contracts/audio-window/instances
+      expected_declarations_json: '["SonusAuris.Audio.AudioWindowDescriptorV1"]'
