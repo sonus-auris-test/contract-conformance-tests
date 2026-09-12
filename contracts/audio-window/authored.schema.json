@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/sonus-auris-test/contract-conformance-tests/contracts/audio-window/authored.schema.json",
+  "$defs": {
+    "AudioWindowDescriptorV1": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "$id": "AudioWindowDescriptorV1",
+      "type": "object",
+      "properties": {
+        "version": { "type": "integer", "minimum": 1, "maximum": 1 },
+        "sample_rate_hz": { "type": "integer", "minimum": 8000, "maximum": 192000 },
+        "frame_count": { "type": "integer", "minimum": 1, "maximum": 1000000 },
+        "label": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "speech_detected": { "type": "boolean" }
+      },
+      "required": ["version", "sample_rate_hz", "frame_count", "label", "speech_detected"],
+      "unevaluatedProperties": false
+    }
+  }
+}
