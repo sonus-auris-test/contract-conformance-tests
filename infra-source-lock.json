@@ -1,12 +1,12 @@
 {
   "source_repo": "sonus-auris/sonus-auris-infra",
-  "head_sha": "269a9b493bd6498e9a368e3e8a022d37d876f9ca",
+  "head_sha": "9e0a0eec66fe1a6267502f52164e6dfa414ce2ca",
   "execution_mode": "independent-oracle",
   "files": {
     ".ores-infra.toml": "7500bb3189b481bf8eb540ea6812e5a0cc716922",
-    "environments/preview/main.tf": "6d2d7f0ad4c28c269d523214963ddcbd53fafa03",
-    "environments/staging/main.tf": "b199dd74c6770facde3dc6ed7af3894f400789c6",
-    "environments/production/main.tf": "e497437a1d85ab92f4ed6b3e067d0476b49d48f0",
+    "environments/preview/main.tf": "05fc3601ece4887763d856941c3435fca26e8a5c",
+    "environments/staging/main.tf": "c2eae8ac328d7ca569caf518053b768c0e65368a",
+    "environments/production/main.tf": "2d777133fc3c8fd30e744df3548327e82c1549bd",
     "modules/cloudflare/terraform/worker-shell/main.tf": "a1f6f57062065ae466b51d5e42452d1466e896f8",
     "modules/cloudflare/durable-coordinator/wrangler.jsonc": "ecc81eeb09bf9ecfcf8ff83e4e791e4745ffcfd1"
   }
