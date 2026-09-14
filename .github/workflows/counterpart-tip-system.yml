@@ -20,7 +20,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail; primary="${GITHUB_REPOSITORY_OWNER%-test}"; found=0; inspected=0
-          while IFS=$'\t' read -r repo branch; do if [[ "$repo" =~ (interfaces|api|schema|contract|lib-core|infra) ]]; then inspected=$((inspected + 1)); sha="$(gh api "repos/${primary}/${repo}/commits/${branch}" --jq .sha)"; if gh api "repos/${primary}/${repo}/git/trees/${sha}?recursive=1" --jq '.tree[].path' | grep -Eq '(^|/)(\.ores-infra\.toml|\.zpkg\.toml|[^/]+\.tsp|[^/]+\.proto|[^/]+\.wit|openapi[^/]*\.(json|ya?ml)|[^/]*schema[^/]*\.json)$'; then found=1; break; fi; fi; done < /tmp/primary-repos.tsv
+          while IFS=$'\t' read -r repo branch; do
+            inspected=$((inspected + 1))
+            sha="$(gh api "repos/${primary}/${repo}/commits/${branch}" --jq .sha)"
+            if gh api "repos/${primary}/${repo}/git/trees/${sha}?recursive=1" --jq '.tree[].path' | grep -Eq '(^|/)(\.ores-infra\.toml|\.zpkg\.toml|[^/]+\.tsp|[^/]+\.proto|[^/]+\.wit|openapi[^/]*\.(json|ya?ml)|[^/]*schema[^/]*\.json)$'; then found=1; break; fi
+          done < /tmp/primary-repos.tsv
           test "$inspected" -gt 0; test "$found" -eq 1
       - name: Test 3 - zed-pkg dependency tip is reachable
         shell: bash
