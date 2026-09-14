@@ -1,0 +1,15 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "sonus-auris-coordinator",
+  "main": "./worker.mjs",
+  "compatibility_date": "2026-09-14",
+  "workers_dev": false,
+  "preview_urls": false,
+  "durable_objects": { "bindings": [{ "name": "COORDINATOR", "class_name": "SonusSessionCoordinator" }] },
+  "exports": { "SonusSessionCoordinator": { "type": "durable-object", "storage": "sqlite" } },
+  "env": {
+    "preview": { "name": "sonus-auris-coordinator-preview", "workers_dev": false, "preview_urls": true, "durable_objects": { "bindings": [{ "name": "COORDINATOR", "class_name": "SonusSessionCoordinator" }] } },
+    "staging": { "name": "sonus-auris-coordinator-staging", "workers_dev": false, "preview_urls": false, "durable_objects": { "bindings": [{ "name": "COORDINATOR", "class_name": "SonusSessionCoordinator" }] } },
+    "production": { "name": "sonus-auris-coordinator-production", "workers_dev": false, "preview_urls": false, "durable_objects": { "bindings": [{ "name": "COORDINATOR", "class_name": "SonusSessionCoordinator" }] } }
+  }
+}
