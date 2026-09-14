@@ -6,7 +6,7 @@ import tomllib
 import unittest
 
 SOURCE_REPO = "sonus-auris/sonus-auris-infra"
-SOURCE_SHA = "269a9b493bd6498e9a368e3e8a022d37d876f9ca"
+SOURCE_SHA = "9e0a0eec66fe1a6267502f52164e6dfa414ce2ca"
 ENVIRONMENTS = ("preview", "staging", "production")
 
 
