@@ -8,8 +8,6 @@ htmlcov/
 .venv/
 
 # Repository-local temporary data and authorized Git worktrees
-tmp
-temp
 tmp/worktrees
 temp/worktrees
 # >>> ores fleet hygiene — managed block, edits below are overwritten >>>
@@ -19,3 +17,6 @@ tmp/worktrees/
 # Local temporary directories and repository-owned worktrees
 tmp/
 temp/
+
+# machine-local symlink to ORESoftware/my-ai AGENTS.md; never committed
+.ores/
