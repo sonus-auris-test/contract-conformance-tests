@@ -1,0 +1,20 @@
+{
+  "schema": "sonus-operational-formal-outside-in.v1",
+  "source_repository": "sonus-auris/sonus-auris-formal",
+  "source_pull_request": 11,
+  "source_commit": "baeb57490006d31aa8208337eebe961948419874",
+  "evidence_class": "vendored-byte-identical-outside-in",
+  "limitations": [
+    "This proves the vendored model bytes and their Quint behavior on sonus-auris-test hosted runners.",
+    "It does not replace required exact-head checks in sonus-auris/sonus-auris-formal.",
+    "It does not prove runtime implementation refinement for consumer repositories."
+  ],
+  "models": {
+    "client_transport.qnt": "cbe3ccfea2786457f8b4d811382ba4e08f50bcac",
+    "infra_rollout.qnt": "f3adf31a8f121cb7487366ff5af1fdaac7b4f585",
+    "lambda_delivery.qnt": "efa9433de21d99840bb709c0d655b8ad928b9d2c",
+    "sidecar_lifecycle.qnt": "c831a0385f6ad1a266eb04487237fefd48833d81",
+    "supabase_target.qnt": "d8eec3d508dd06900d200aa8d1912ce2ed8b8e1c",
+    "web_session.qnt": "aa05758517b727d0582a6e7b403161627435cb33"
+  }
+}
