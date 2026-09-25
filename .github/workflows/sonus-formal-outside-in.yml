@@ -1,0 +1,108 @@
+name: Sonus operational formal outside-in
+
+on:
+  pull_request:
+    paths:
+      - 'evidence/operational-formal/**'
+      - '.github/workflows/sonus-formal-outside-in.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sonus-operational-formal-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quint:
+    name: ${{ matrix.id }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - id: web-session-v1
+            spec: evidence/operational-formal/web_session.qnt
+            blob: aa05758517b727d0582a6e7b403161627435cb33
+            main: web_session
+            witnesses: session_reachable revoked_reachable
+          - id: lambda-delivery-v1
+            spec: evidence/operational-formal/lambda_delivery.qnt
+            blob: efa9433de21d99840bb709c0d655b8ad928b9d2c
+            main: lambda_delivery
+            witnesses: success_reachable dead_letter_reachable
+          - id: sidecar-lifecycle-v1
+            spec: evidence/operational-formal/sidecar_lifecycle.qnt
+            blob: c831a0385f6ad1a266eb04487237fefd48833d81
+            main: sidecar_lifecycle
+            witnesses: degraded_telemetry_still_serves stopped_reachable
+          - id: supabase-target-v1
+            spec: evidence/operational-formal/supabase_target.qnt
+            blob: d8eec3d508dd06900d200aa8d1912ce2ed8b8e1c
+            main: supabase_target
+            witnesses: production_reachable disabled_after_production_reachable
+          - id: infra-rollout-v1
+            spec: evidence/operational-formal/infra_rollout.qnt
+            blob: f3adf31a8f121cb7487366ff5af1fdaac7b4f585
+            main: infra_rollout
+            witnesses: promotion_reachable rollback_reachable
+          - id: client-transport-v1
+            spec: evidence/operational-formal/client_transport.qnt
+            blob: cbe3ccfea2786457f8b4d811382ba4e08f50bcac
+            main: client_transport
+            witnesses: probe_success_reachable storage_success_reachable redirect_rejection_reachable
+
+    steps:
+      - name: Check out exact canary head
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+
+      - name: Verify canary head and source blob identity
+        shell: bash
+        env:
+          EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          SPEC: ${{ matrix.spec }}
+          EXPECTED_BLOB: ${{ matrix.blob }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          git diff --check
+          test "$(git hash-object "$SPEC")" = "$EXPECTED_BLOB"
+          grep -F '"source_commit": "baeb57490006d31aa8208337eebe961948419874"' evidence/operational-formal/source.json >/dev/null
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: '22.16.0'
+
+      - name: Set up Java for exhaustive verification
+        uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Typecheck model
+        run: npx --yes --package='@informalsystems/quint@0.32.0' quint typecheck "${{ matrix.spec }}"
+
+      - name: Simulate safety invariant and witnesses
+        shell: bash
+        run: |
+          set -euo pipefail
+          read -r -a witnesses <<< "${{ matrix.witnesses }}"
+          npx --yes --package='@informalsystems/quint@0.32.0' quint run "${{ matrix.spec }}" \
+            --main="${{ matrix.main }}" \
+            --max-samples=2000 \
+            --max-steps=16 \
+            --invariant=safety \
+            --witnesses "${witnesses[@]}"
+
+      - name: Exhaustively verify safety invariant
+        run: |
+          npx --yes --package='@informalsystems/quint@0.32.0' quint verify "${{ matrix.spec }}" \
+            --main="${{ matrix.main }}" \
+            --max-steps=16 \
+            --invariant=safety
