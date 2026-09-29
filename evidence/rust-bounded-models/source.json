@@ -1,0 +1,23 @@
+{
+  "schema": "sonus-rust-bounded-models-outside-in.v1",
+  "evidence_class": "vendored-byte-identical-outside-in",
+  "models": {
+    "audio_chunk_model.rs": {
+      "repository": "sonus-auris/sonus-auris-sync",
+      "pull_request": 25,
+      "commit": "b65eb234801b1531c6149a9198092c9acaeb6e41",
+      "blob": "9c15900604070e17ae41a9107e61007251c0c37e"
+    },
+    "signed_artifact_model.rs": {
+      "repository": "sonus-auris/sonus-auris-web-server.rs",
+      "pull_request": 53,
+      "commit": "842b058bc43f460da02aa2f34ba25c1737b2bfd0",
+      "blob": "e7b53e470206ce7a5980e019b044df21de007192"
+    }
+  },
+  "limitations": [
+    "This proves the vendored source bytes execute under sonus-auris-test hosted runners.",
+    "It does not replace required exact-head checks in either production source repository.",
+    "It does not prove integration with the production runtime implementations."
+  ]
+}

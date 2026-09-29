@@ -1,0 +1,66 @@
+name: Rust bounded models outside-in
+
+on:
+  pull_request:
+    paths:
+      - 'evidence/rust-bounded-models/**'
+      - '.github/workflows/rust-bounded-models-outside-in.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rust-bounded-models-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  model:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - id: audio-chunk-replay
+            source: evidence/rust-bounded-models/audio_chunk_model.rs
+            blob: 9c15900604070e17ae41a9107e61007251c0c37e
+          - id: signed-artifact-admission
+            source: evidence/rust-bounded-models/signed_artifact_model.rs
+            blob: e7b53e470206ce7a5980e019b044df21de007192
+
+    steps:
+      - name: Check out exact canary head
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+
+      - name: Verify exact canary head and source blob
+        shell: bash
+        env:
+          EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          SOURCE: ${{ matrix.source }}
+          EXPECTED_BLOB: ${{ matrix.blob }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          git diff --check
+          test "$(git hash-object "$SOURCE")" = "$EXPECTED_BLOB"
+
+      - name: Install pinned Rust toolchain
+        run: rustup toolchain install 1.90.0 --profile minimal --component rustfmt
+
+      - name: Format exact model
+        run: rustfmt +1.90.0 --check "${{ matrix.source }}"
+
+      - name: Compile with warnings denied
+        run: rustc +1.90.0 --edition=2021 -D warnings "${{ matrix.source }}" -o "/tmp/${{ matrix.id }}"
+
+      - name: Unit-test exact model
+        run: |
+          rustc +1.90.0 --edition=2021 -D warnings --test "${{ matrix.source }}" -o "/tmp/${{ matrix.id }}-tests"
+          "/tmp/${{ matrix.id }}-tests"
+
+      - name: Execute exact model
+        run: "/tmp/${{ matrix.id }}"
